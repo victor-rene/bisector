@@ -1,8 +1,24 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""
+Bone. Base component of the StickMan.
+"""
+
 import math
 
 from kivy.graphics.context_instructions import PopMatrix, PushMatrix, Rotate
 from kivy.properties import NumericProperty
 from kivy.uix.image import Image
+
+__author__ = "Victor RENÉ"
+__copyright__ = "Copyright 2015, bisector"
+__credits__ = ["Kivy Team"]
+__license__ = "MIT"
+__version__ = "0.1"
+__maintainer__ = "Victor RENÉ"
+__email__ = "victor-rene@outlook.com"
+__status__ = "Production"
 
 
 class Bone(Image):
@@ -46,10 +62,10 @@ class Bone(Image):
       
   def update(self, *args):
     self.radius = self.width / 2
-    self.bone_length = self.height - self.radius * 2 # approximate for head / tip radii
+     # approximate for head / tip radii
+    self.bone_length = self.height - self.radius * 2
     self.head = self.x + self.radius, self.top - self.radius
     self.tip = self.get_tip_pos()
-    # print 'head', self.head, self.prev, self.pos
     self.rotation.origin = self.head
     for bone in self.next:
       self.coerce(bone)
@@ -66,6 +82,5 @@ class Bone(Image):
     self.pos = head_x - radius, head_y - radius - self.bone_length
     
   def coerce(self, bone):
-    # print 'tip', self.get_tip_pos(), self.prev, self.pos
     bone.set_head_pos(self.tip)
     bone.rotate()

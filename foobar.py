@@ -1,3 +1,10 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""
+FooBar. Your practice dummy.
+"""
+
 import copy
 import math
 import os
@@ -5,6 +12,15 @@ import os
 from kivy.uix.widget import Widget
 from kivy.graphics import Mesh
 from kivy.properties import NumericProperty
+
+__author__ = "Victor RENÉ"
+__copyright__ = "Copyright 2015, bisector"
+__credits__ = ["Kivy Team"]
+__license__ = "MIT"
+__version__ = "0.1"
+__maintainer__ = "Victor RENÉ"
+__email__ = "victor-rene@outlook.com"
+__status__ = "Production"
 
 
 class FooBar(Widget):

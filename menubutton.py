@@ -1,5 +1,21 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""
+MenuButton. An animated button.
+"""
+
 from kivy.animation import Animation
 from kivy.uix.button import Button
+
+__author__ = "Victor RENÉ"
+__copyright__ = "Copyright 2015, bisector"
+__credits__ = ["Kivy Team"]
+__license__ = "MIT"
+__version__ = "0.1"
+__maintainer__ = "Victor RENÉ"
+__email__ = "victor-rene@outlook.com"
+__status__ = "Production"
 
 
 class MenuButton(Button):

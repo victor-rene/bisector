@@ -1,8 +1,24 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""
+Slash. Rotable and scalable image. The temperature property sets the color.
+"""
+
 from kivy.graphics import Color, Rectangle
 from kivy.graphics.context_instructions import PushMatrix, PopMatrix, Rotate
 from kivy.graphics.instructions import InstructionGroup
 from kivy.properties import NumericProperty
 from kivy.uix.widget import Widget
+
+__author__ = "Victor RENÉ"
+__copyright__ = "Copyright 2015, bisector"
+__credits__ = ["Kivy Team"]
+__license__ = "MIT"
+__version__ = "0.1"
+__maintainer__ = "Victor RENÉ"
+__email__ = "victor-rene@outlook.com"
+__status__ = "Production"
 
 
 class Slash(Widget):

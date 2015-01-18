@@ -1,3 +1,10 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""
+Score screen. Score list and button to navigate to main menu.
+"""
+
 from kivy.core.audio import SoundLoader
 from kivy.graphics import Rectangle
 from kivy.uix.label import Label
@@ -7,6 +14,15 @@ from kivy.uix.stacklayout import StackLayout
 from katana import Katana
 from menubutton import MenuButton
 from stickman import StickMan
+
+__author__ = "Victor RENÉ"
+__copyright__ = "Copyright 2015, bisector"
+__credits__ = ["Kivy Team"]
+__license__ = "MIT"
+__version__ = "0.1"
+__maintainer__ = "Victor RENÉ"
+__email__ = "victor-rene@outlook.com"
+__status__ = "Production"
 
 
 class ScoreScreen(Screen):

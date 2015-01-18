@@ -1,6 +1,22 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""
+Katana. A rotable and scalable image.
+"""
+
 from kivy.graphics.context_instructions import PushMatrix, PopMatrix, Rotate
 from kivy.properties import NumericProperty
 from kivy.uix.image import Image
+
+__author__ = "Victor RENÉ"
+__copyright__ = "Copyright 2015, bisector"
+__credits__ = ["Kivy Team"]
+__license__ = "MIT"
+__version__ = "0.1"
+__maintainer__ = "Victor RENÉ"
+__email__ = "victor-rene@outlook.com"
+__status__ = "Production"
 
 
 class Katana(Image):

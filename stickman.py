@@ -1,11 +1,26 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""
+StickMan. Your favorite dancer and fighter.
+"""
+
 import random, sys
 
 from kivy.animation import Animation
 from kivy.clock import Clock
 from kivy.uix.relativelayout import RelativeLayout
-# from kivy.uix.floatlayout import FloatLayout
 
 from bone import Bone
+
+__author__ = "Victor RENÉ"
+__copyright__ = "Copyright 2015, bisector"
+__credits__ = ["Kivy Team"]
+__license__ = "MIT"
+__version__ = "0.1"
+__maintainer__ = "Victor RENÉ"
+__email__ = "victor-rene@outlook.com"
+__status__ = "Production"
 
 
 class StickMan(RelativeLayout):
