@@ -62,7 +62,7 @@ class MenuScreen(Screen):
         
         try:
             pygame.mixer.music.load('music/comp-04-bis.ogg')
-            pygame.mixer.music.play(9)
+            pygame.mixer.music.play(9) # 10 plays
         except:
             import traceback
             print traceback.format_exc()
