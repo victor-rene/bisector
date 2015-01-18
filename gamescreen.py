@@ -1,3 +1,10 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""
+Game screen. Loads the score screen when the game is over.
+"""
+
 import math
 from random import randint
 
@@ -12,6 +19,15 @@ from kivy.uix.stacklayout import StackLayout
 from foobar import FooBar
 from katana import Katana
 from slash import Slash
+
+__author__ = "Victor RENÉ"
+__copyright__ = "Copyright 2015, bisector"
+__credits__ = ["Kivy Team"]
+__license__ = "MIT"
+__version__ = "0.1"
+__maintainer__ = "Victor RENÉ"
+__email__ = "victor-rene@outlook.com"
+__status__ = "Production"
 
 
 class GameScreen(Screen):
@@ -42,16 +58,20 @@ class GameScreen(Screen):
         self.add_widget(self.lbl_level_num)
         self.set_level(1)
         
+        self.lbl_score = Image(source='img/score.png', size_hint=(.3, .1),
+            pos_hint={'center_x': .2, 'center_y': .6})
+        self.lbl_score_num = StackLayout(
+            pos_hint={'x': .15, 'center_y': .5},
+            orientation='tb-lr', size_hint=(.2, .2))
+        self.add_widget(self.lbl_score)
+        self.add_widget(self.lbl_score_num)
+        self.score = 0
+        self.update_score()
+        
         self.lbl_high = StackLayout(pos_hint={'center_x': .8, 'center_y': .8},
             orientation='tb-lr', size_hint=(.4, .2))
-            # Label(text='%03d' % self.bound_high,
-            # pos_hint={'center_x': .75, 'center_y': .8},
-            # markup=True)
         self.lbl_low = StackLayout(pos_hint={'center_x': .8, 'center_y': .2},
             orientation='tb-lr', size_hint=(.4, .2))
-            # Label(text='%03d' % self.bound_low,
-            # pos_hint={'center_x': .75, 'center_y': .2},
-            # markup=True)
         self.add_widget(self.lbl_high)
         self.add_widget(self.lbl_low)
         
@@ -60,9 +80,8 @@ class GameScreen(Screen):
         self.ig_cut = InstructionGroup()
         self.canvas.after.add(self.ig_cut)
 
-    def set_level(self, value, score=0):
+    def set_level(self, value):
         self.level = value
-        self.score = score
         self.lbl_level_num.source = 'img/%s.png' % self.level
         self.bound_high = 99 + (50 * (value - 1))
         self.bound_low = 0
@@ -83,9 +102,6 @@ class GameScreen(Screen):
         if not self._initialized:
             self.update_ammo()
             self._initialized = True
-            
-    # def black_text(self, s):
-        # return '[color=#000000]' + s + '[/color]'
             
     def on_touch_down(self, touch):
         self.touches = [touch.x, touch.y, None, None]
@@ -128,9 +144,33 @@ class GameScreen(Screen):
         if self.ammo == 0:
             self.game_over()
             
+    def save_score(self):
+        import os
+        curr_dir = os.path.dirname(os.path.realpath(__file__))
+        score_file = os.path.join(curr_dir, 'scores.txt')
+        scores = None
+        try:
+            with open(score_file, 'r') as f:
+                lines = f.readlines()
+                scores = [int(line) for line in lines]
+                scores.append(self.score)
+                scores.sort(reverse=True)
+                excess = len(scores) - 10
+                for i in range(excess):
+                    del scores[-1]
+            with open(score_file, 'w') as f:
+                for score in scores:
+                    f.write(str(score) + '\n')
+        except:
+            import traceback
+            print traceback.format_exc()
+            
     def game_over(self):
+        self.save_score()
         self.set_level(1)
-        self.root_widget.current = 'score'
+        self.score = 0
+        self.update_score()
+        self.root_widget.show_scores()
             
     def remove_slash(self, *args):
         self.ig_cut.clear()
@@ -141,24 +181,37 @@ class GameScreen(Screen):
         self.lbl_high.clear_widgets()
         self.lbl_low.clear_widgets()
         for c in str(self.bound_high):
-            self.lbl_high.add_widget(Image(source='img/' + c + '.png', size_hint_x=.2))
+            self.lbl_high.add_widget(
+                Image(source='img/' + c + '.png', size_hint_x=.2))
         for c in str(self.bound_low):
-            self.lbl_low.add_widget(Image(source='img/' + c + '.png', size_hint_x=.2))
+            self.lbl_low.add_widget(
+                Image(source='img/' + c + '.png', size_hint_x=.2))
             
     def remove_cut_number(self, *args):
         self.remove_widget(args[1])
             
     def show_cut_number(self):
-        sl = StackLayout(pos_hint={'center_x': .5, 'center_y': .5},
+        sl = StackLayout(pos=(self.width * .4, self.height * .4),
             orientation='tb-lr', size_hint=(.4, .2))
         for c in str(self.cut_value):
             sl.add_widget(Image(source='img/' + c + '.png', size_hint_x=.2))
         self.add_widget(sl)
-        anim1 = Animation(x=sl.x+100, t='in_circ')
-        anim2 = Animation(y=sl.y+100, t='out_circ')
-        anim = anim1 & anim2
+        anim1 = Animation(x=sl.x+100, t='in_quad')
+        if self.cut_value > self.number: 
+            anim2 = Animation(y=sl.y+150, t='out_circ')
+        elif self.cut_value < self.number:
+            anim2 = Animation(y=sl.y-150, t='out_circ')
+        else: anim2 = Animation(x=sl.x-150)
+        anim3 = Animation(opacity=.5)
+        anim = anim1 & anim2 & anim3
         anim.bind(on_complete=self.remove_cut_number)
         anim.start(sl)
+        
+    def update_score(self):
+        self.lbl_score_num.clear_widgets()
+        for c in str(self.score):
+            self.lbl_score_num.add_widget(
+                Image(source='img/' + c + '.png', size_hint_x=.2))
             
     def rebound(self):
         anim = Animation(opacity=0.)
@@ -177,8 +230,10 @@ class GameScreen(Screen):
             self.bound_low = self.cut_value
             self.dec_ammo()
         else:
+            self.score += self.level * 10 + len(self.katanas.children)
+            self.update_score()
             self.set_level(self.level + 1)
-        self.update_bounds() # implicit, always called
+        self.update_bounds() # implicit, must always called after
         
     def on_touch_up(self, touch):
         value = self.get_cut_value()
