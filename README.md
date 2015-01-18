@@ -6,6 +6,13 @@ Done in two days, for the 2015 january monthly Kivy contest. I practiced new
 techniques, like importing and modifying a mesh, with various animations, and
 image rotations. I also included a self-made sound track.
 
+<img src="https://github.com/victor-rene/bisector/raw/master/img/sc_02.png" style="height:100px">
+<img src="https://github.com/victor-rene/bisector/raw/master/img/sc_03.png" style="height:100px">
+
+Download
+--------
+![bisector.zip](https://github.com/victor-rene/bisector/raw/master/bin/bisector.zip "bisector.zip")
+
 The idea
 --------
 One of the first tutorial I give to students has always been a bisection

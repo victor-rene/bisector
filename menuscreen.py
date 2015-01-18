@@ -5,7 +5,7 @@
 Menu screen. Access to the game and scores screen.
 """
 
-from kivy.core.audio import SoundLoader
+import pygame.mixer_music
 from kivy.graphics import Rectangle
 from kivy.uix.screenmanager import Screen
 
@@ -60,10 +60,12 @@ class MenuScreen(Screen):
         ktn.angle = 90
         self.add_widget(ktn)
         
-        snd = SoundLoader.load('music/comp-04-bis.ogg')
-        if snd:
-            snd.loop = True
-            snd.play()
+        try:
+            pygame.mixer.music.load('music/comp-04-bis.ogg')
+            pygame.mixer.music.play()
+        except:
+            import traceback
+            print traceback.format_exc()
             
     def _update_rect(self, *args):
         self.rect.pos = self.pos
