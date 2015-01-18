@@ -1,6 +1,12 @@
-.pyc
-.cmd
+# Python compiled files
+*.pyc
+*.cmd
 
+# Design
 design/
+art/
+screenshot/
 
+# Test modules
 test*
+
