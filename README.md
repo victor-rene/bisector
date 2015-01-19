@@ -11,7 +11,7 @@ image rotations. I also included a self-made sound track.
 
 Download
 --------
-Windows binary: <a href="https://github.com/victor-rene/bisector/raw/master/bin/bisector.zip">bisector.zip</a>
+Windows binary: <a href="https://github.com/victor-rene/bisector/raw/master/bin/bisector-0.1.zip">bisector.zip</a>
 
 The idea
 --------
